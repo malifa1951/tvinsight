@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Ajouter un film — {{ app_name }}{% endblock %}
+
+{% block content %}
+<h2>➕ Ajouter un film</h2>
+<div class="card form-card">
+    <form method="post">
+        <div class="mb-3">
+            <label>Titre *</label>
+            <input type="text" name="titre" class="form-control" required autofocus
+                   list="suggest-list" autocomplete="off" data-suggest-type="film"
+                   placeholder="Ex : Inception">
+            <datalist id="suggest-list"></datalist>
+            <small id="suggest-hint" class="text-muted">Tape au moins 2 lettres : les titres du catalogue sont proposés.</small>
+        </div>
+
+        <input type="hidden" name="genre_nom" value="">
+
+        <div class="form-row">
+            <div class="mb-3">
+                <label>Année</label>
+                <input type="number" name="annee" class="form-control" min="1900" max="2100">
+            </div>
+            <div class="mb-3">
+                <label>Durée (min)</label>
+                <input type="number" name="duree" class="form-control" min="1">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="mb-3">
+                <label>Note (0-10)</label>
+                <input type="number" step="0.1" name="note" class="form-control" min="0" max="10">
+            </div>
+            <div class="mb-3">
+                <label>Genre</label>
+                <select name="genre_id" class="form-select">
+                    <option value="">— Choisir —</option>
+                    {% for g in genres %}
+                    <option value="{{ g.id }}">{{ g.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Synopsis</label>
+            <textarea name="synopsis" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-success" type="submit">💾 Enregistrer</button>
+            <a href="/films" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='suggest.js') }}"></script>
+{% endblock %}

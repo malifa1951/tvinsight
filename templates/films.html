@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Films — {{ app_name }}{% endblock %}
+{% block content %}
+
+<h2>🎥 Liste des films</h2>
+
+<a href="/films/add" class="btn btn-primary" style="margin-bottom: 1rem;">➕ Ajouter un film</a>
+
+{% if films %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Année</th>
+            <th>Durée</th>
+            <th>Note</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for f in films %}
+        <tr>
+            <td>{{ f.id }}</td>
+            <td><strong>{{ f.titre }}</strong></td>
+            <td>{{ f.annee or '—' }}</td>
+            <td>{{ f.duree }} min</td>
+            <td>
+                {% if f.note %}<span class="badge badge-note">⭐ {{ f.note }}</span>{% else %}—{% endif %}
+            </td>
+            <td>{{ f.genre.nom if f.genre else '—' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card empty-state">
+    <h3>Aucun film pour le moment</h3>
+    <a href="/films/add" class="btn btn-primary">➕ Ajouter un film</a>
+</div>
+{% endif %}
+
+{% endblock %}

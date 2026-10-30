@@ -25,17 +25,12 @@
         </button>
 
         <div class="nav-links" id="navLinks">
-            <a href="/" class="nav-link">🏠 Accueil</a>
-            <a href="/add" class="nav-link">➕ Ajouter</a>
-            <a href="/stats" class="nav-link">📊 Statistiques</a>
+            <a href="/" class="nav-link">🏠 Séries</a>
+            <a href="/films" class="nav-link">🎥 Films</a>
+            <a href="/plateformes" class="nav-link">📡 Plateformes</a>
+            <a href="/recommandations" class="nav-link">✨ Recommandations</a>
+            <a href="/stats/dynamique" class="nav-link">📊 Statistiques</a>
             <a href="/export" class="nav-link">📥 Export</a>
-            {% if current_user.is_authenticated %}
-                <span class="user-badge">
-                    <span class="user-dot"></span>
-                    {{ current_user.id }}
-                </span>
-                <a href="/logout" class="nav-link nav-link-danger">🚪 Déconnexion</a>
-            {% endif %}
         </div>
     </div>
 </nav>
@@ -58,11 +53,17 @@
 <footer class="footer">
     <p>
         <strong>{{ app_name }}</strong> v{{ app_version }} — Projet Big Data
-        • Flask + PostgreSQL + Docker
+        • by ALIFA MOUSTAPHA ALIFA
         • © {{ current_year }}
+        • Code sous <a href="https://github.com/malifa1951/tvinsight" target="_blank" rel="noopener">licence MIT</a>
+    </p>
+    <p>
+        Données : <a href="https://developer.imdb.com/non-commercial-datasets/" target="_blank" rel="noopener">IMDb Non-Commercial Datasets</a>
+        (usage non commercial uniquement)
     </p>
 </footer>
 
 <script src="{{ url_for('static', filename='app.js') }}"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

@@ -13,8 +13,15 @@
             <label>Titre *</label>
             <input type="text" name="titre" class="form-control"
                    value="{{ serie.titre if serie else '' }}"
-                   placeholder="Ex : Breaking Bad" required autofocus>
+                   placeholder="Ex : Breaking Bad" required autofocus
+                   {% if not serie %}list="suggest-list" autocomplete="off" data-suggest-type="serie"{% endif %}>
+            {% if not serie %}
+            <datalist id="suggest-list"></datalist>
+            <small id="suggest-hint" class="text-muted">Tape au moins 2 lettres : les titres du catalogue sont proposés.</small>
+            {% endif %}
         </div>
+
+        <input type="hidden" name="genre_nom" value="">
 
         <div class="form-row">
             <div class="mb-3">
@@ -61,4 +68,8 @@
     </form>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='suggest.js') }}"></script>
 {% endblock %}

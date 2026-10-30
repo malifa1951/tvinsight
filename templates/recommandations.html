@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>✨ Recommandations personnalisées</h2>
+<p class="subtitle">Suggestions basées sur les genres populaires, les notes et les plateformes.</p>
+
+<div class="card">
+    <h4>🔥 Genres populaires</h4>
+    <ul class="list-group">
+        {% for nom, nb in genres_populaires %}
+            <li class="list-group-item">
+                <strong>{{ nom }}</strong>
+                <span class="badge badge-genre">{{ nb }} séries</span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <h4>⭐ Top 10 des séries les mieux notées</h4>
+    <ul class="list-group">
+        {% for s in top_series %}
+            <li class="list-group-item">
+                <strong>{{ s.titre }}</strong>
+                <span class="badge badge-note">⭐ {{ s.note }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <h4>🎬 Top 10 des films les mieux notés</h4>
+    <ul class="list-group">
+        {% for f in top_films %}
+            <li class="list-group-item">
+                <strong>{{ f.titre }}</strong>
+                <span class="badge badge-note">⭐ {{ f.note }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% for plateforme, series in series_par_plateforme.items() %}
+<div class="card">
+    <h4>📡 Sur {{ plateforme }}</h4>
+    <ul class="list-group">
+        {% for s in series %}
+            <li class="list-group-item">
+                <strong>{{ s.titre }}</strong>
+                {% if s.note %}<span class="badge badge-note">⭐ {{ s.note }}</span>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock %}

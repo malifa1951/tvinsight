@@ -19,3 +19,9 @@ benchmark*.py
 
 # Exceptions
 !data/sample.csv
+# Donnees IMDb (trop lourdes pour GitHub)
+data/title.*.tsv.gz
+
+# Archives
+*.tar.gz
+*.zip

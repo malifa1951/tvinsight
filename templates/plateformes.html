@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>📡 Plateformes de diffusion</h2>
+
+{% if plateformes %}
+<div class="kpi-grid">
+    {% for p in plateformes %}
+    <div class="kpi-card" style="border-left: 4px solid {{ p.couleur or '#6366f1' }};">
+        <div class="kpi-icon">📺</div>
+        <div class="kpi-content">
+            <span class="kpi-value" style="color: {{ p.couleur or '#6366f1' }};">{{ p.nom }}</span>
+            <span class="kpi-label">{{ p.series|length }} séries</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">Aucune plateforme enregistrée.</p>
+{% endif %}
+{% endblock %}

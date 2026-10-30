@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>📊 Statistiques dynamiques</h2>
+
+<!-- Choix du type de statistiques -->
+<div class="card">
+    <h4>🎯 Choisir le type d'analyse</h4>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <a href="?type=top" class="btn {{ 'btn-primary' if type_stats == 'top' else 'btn-secondary' }}">🏆 Top notes</a>
+        <a href="?type=saisons" class="btn {{ 'btn-primary' if type_stats == 'saisons' else 'btn-secondary' }}">📺 Nb saisons</a>
+        <a href="?type=episodes" class="btn {{ 'btn-primary' if type_stats == 'episodes' else 'btn-secondary' }}">🎞️ Nb épisodes</a>
+        <a href="?type=genres" class="btn {{ 'btn-primary' if type_stats == 'genres' else 'btn-secondary' }}">🎭 Par genre</a>
+        <a href="?type=annees" class="btn {{ 'btn-primary' if type_stats == 'annees' else 'btn-secondary' }}">📅 Par année</a>
+        <a href="?type=plateformes" class="btn {{ 'btn-primary' if type_stats == 'plateformes' else 'btn-secondary' }}">📡 Par plateforme</a>
+    </div>
+</div>
+
+<!-- Résultats -->
+<div class="card">
+    <h4>{{ titre_stats }}</h4>
+    {% if resultats %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ colonne1 }}</th>
+                <th>{{ colonne2 }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for v1, v2 in resultats %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><strong>{{ v1 }}</strong></td>
+                <td><span class="badge badge-genre">{{ v2 }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-muted">Aucune donnée disponible pour ce type d'analyse.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
